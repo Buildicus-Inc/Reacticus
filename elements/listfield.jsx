@@ -1,7 +1,9 @@
-/** @jsx React.DOM */
-import React from 'react';
-import _ from 'lodash';
-import {isComponent, isInput, deepCloneComponent} from './identities';
+var _ = require('lodash');
+var React = require('react');
+var identities = require('./identities');
+var isComponent = identities.isComponent,
+  isInput = identities.isInput,
+  deepCloneComponent = identities.deepCloneComponent;
 
 /*
   <ListField onChange={this.receiveData} defaultValue={[{item: "foo"}]}>

@@ -1,0 +1,36 @@
+{
+  "name": "reacticus",
+  "version": "1.0.0",
+  "description": " set of useful React components",
+  "author": "EditLLC <you.name@example.org>",
+  "contributors": [{
+    "name": "Zach Silveira",
+    "email": "zackify@gmail.com"
+  },
+  {
+    "name": "Jason Kraus",
+    "email": "zbyte64@gmail.com"
+  }
+],
+  "main": "index.js",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/EditLLC/Reacticus"
+},
+  "bugs": {
+  "url": "https://github.com/EditLLC/Reacticus/issues"
+},
+  "keywords": [
+  "react",
+  "reactjs",
+  "elements",
+  "components"
+],
+  "dependencies": {
+    "gulp-react": "2.0.0",
+    "gulp": "3.8.9",
+    "lodash": "2.4.1",
+    "react": "0.12.0"
+  },
+  "license": "MIT"
+}

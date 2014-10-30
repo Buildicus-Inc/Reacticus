@@ -1,7 +1,5 @@
-/** @jsx React.DOM */
-
-import _ from 'lodash';
-import postal from 'postal';
+var _ = require('lodash');
+var postal = require('postal');
 
 export var SubscriptionMixin = {
   /*

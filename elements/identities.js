@@ -1,4 +1,4 @@
-import React from 'react';
+var React = require('react');
 
 export function isComponent(obj) {
   //ghetto check because JS

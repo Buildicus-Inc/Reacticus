@@ -1,5 +1,4 @@
-/** @jsx React.DOM */
-import React from 'react';
+var React = require('react');
 
 export var ColorPicker = React.createClass({
   propTypes: {

@@ -1,7 +1,5 @@
-/** @jsx React.DOM */
-import React from 'react';
-import {I18n} from './i18n';
-
+var I18n = require('./i18n').I18n;
+var React = require('react');
 //TODO cleanup prop interface
 export var Upload = React.createClass({
   static : {

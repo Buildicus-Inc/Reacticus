@@ -1,6 +1,5 @@
-/** @jsx React.DOM */
-import React from 'react';
-import _ from 'lodash';
+var _ = require('lodash');
+var React = require('react');
 
 export var CheckBox = React.createClass({
   propTypes: {

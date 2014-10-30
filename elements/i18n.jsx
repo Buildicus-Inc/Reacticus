@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-import _ from 'lodash';
-import React from 'react';
+var _ = require('lodash');
+var React = require('react');
 
 export var TextSeen = {};
 var innerGettext = function(str) {

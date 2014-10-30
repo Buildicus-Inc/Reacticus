@@ -1,9 +1,8 @@
 /** @jsx React.DOM */
 
-import _ from 'lodash';
-import postal from 'postal';
-import React from 'react';
-
+var _ = require('lodash');
+var React = require('react');
+var postal = require('postal');
 /*
  <reacticus.select defaultValue="foo" onChange={mycallback}>
    <option value="">Select a Value</option>

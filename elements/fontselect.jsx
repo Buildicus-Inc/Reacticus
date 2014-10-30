@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-import _ from 'lodash';
-import React from 'react';
-import {Select} from './select';
+var _ = require('lodash');
+var React = require('react');
+var Select = require('./select').Select
 
 export var FontSelect = React.createClass({
   contextTypes: {

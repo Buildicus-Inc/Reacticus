@@ -1,6 +1,5 @@
-/** @jsx React.DOM */
-import React from 'react'
-import {I18n} from './i18n';
+var React = require('react');
+var I18n = require('./i18n').I18n;
 
 export var DeleteInput = React.createClass({
   getInitialState: function() {

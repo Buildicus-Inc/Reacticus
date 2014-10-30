@@ -1,9 +1,7 @@
-/** @jsx React.DOM */
-
-import _ from 'lodash';
-import postal from 'postal';
-import React from 'react';
-import {SubscriptionMixin} from './channels';
+var _ = require('lodash');
+var postal = require('postal');
+var React = require('react');
+var SubscriptionMixin = require('./channels').SubscriptionMixin;
 
 export var ToggleMixin = {
   getInitialState: function() {

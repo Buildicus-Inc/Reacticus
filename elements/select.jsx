@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 
-import _ from 'lodash';
-import postal from 'postal';
-import React from 'react';
-import {deepCloneComponent} from './identities';
+var _ = require('lodash');
+var React = require('react');
+var postal = require('postal');
+var deepCloneComponent = require('./identities').deepCloneComponent;
 
 /*
  <reacticus.select defaultValue="foo" onChange={mycallback}>
