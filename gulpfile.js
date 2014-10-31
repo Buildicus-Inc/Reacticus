@@ -6,6 +6,6 @@ gulp.task('default', function () {
     return gulp.src('lib/**')
     		.pipe(concat('reacticus.js'))
         .pipe(react())
-        //.pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('dist'));
 });

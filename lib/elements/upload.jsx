@@ -1,7 +1,7 @@
 var I18n = require('./i18n').I18n;
 var React = require('react');
 //TODO cleanup prop interface
-export var Upload = React.createClass({
+var Upload = React.createClass({
   static : {
     messages: ['Click here or drop some images', 'Uploading...', 'Successfully Uploaded', 'Click or drag to upload again', 'Drop it now!'],
     colorStatus: ['white', 'yellow', 'green', 'white', '#00FF00']

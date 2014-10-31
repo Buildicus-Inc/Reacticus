@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var React = require('react');
 
-export var SlugInput = React.createClass({
+var SlugInput = React.createClass({
   propTypes: {
     value: React.PropTypes.string
   },

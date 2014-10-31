@@ -3,7 +3,7 @@ var postal = require('postal');
 var React = require('react');
 var SubscriptionMixin = require('./channels').SubscriptionMixin;
 
-export var ToggleMixin = {
+var ToggleMixin = {
   getInitialState: function() {
     return {active: this.props.default || false}
   },
@@ -12,7 +12,7 @@ export var ToggleMixin = {
   }
 };
 
-export var ToggleButton = React.createClass({
+var ToggleButton = React.createClass({
   /* A button with a data-toggle that toggles from 1 to 0 everytime it is clicked */
   mixins: [ToggleMixin],
   onClick: function(event) {
@@ -26,7 +26,7 @@ export var ToggleButton = React.createClass({
   }
 });
 
-export var SectionToggleButton = React.createClass({
+var SectionToggleButton = React.createClass({
   /* A button with a data-toggle that tied to props.section */
   mixins: [ToggleMixin, SubscriptionMixin],
   propTypes: {

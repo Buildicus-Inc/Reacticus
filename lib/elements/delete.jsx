@@ -1,7 +1,7 @@
 var React = require('react');
 var I18n = require('./i18n').I18n;
 
-export var DeleteInput = React.createClass({
+var DeleteInput = React.createClass({
   getInitialState: function() {
     return {confirm: false}
   },

@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var React = require('react');
 
-export var TextSeen = {};
+var TextSeen = {};
 var innerGettext = function(str) {
   return str;
 };
@@ -43,7 +43,7 @@ if (typeof window != "undefined") {
   }
 }
 
-export function gettext(str) {
+function gettext(str) {
   str = str.trimLeft();
   var cstr = str.trimRight();
   TextSeen[cstr] = true;
@@ -56,7 +56,7 @@ export function gettext(str) {
   return innerGettext(str);
 };
 
-export function walkAndTranslate(arg) {
+function walkAndTranslate(arg) {
   if (_.isString(arg)) {
     return gettext(arg)
   }
@@ -67,7 +67,7 @@ export function walkAndTranslate(arg) {
 };
 
 
-export function makeSimpleTranslationTag(tagname) {
+function makeSimpleTranslationTag(tagname) {
   return React.createClass({
     render: function() {
       return React.createElement(tagname, this.props, walkAndTranslate(this.props.children));
@@ -75,7 +75,7 @@ export function makeSimpleTranslationTag(tagname) {
   });
 };
 
-export function makeSimpleTranslationTagWithPlaceholder(tagname) {
+function makeSimpleTranslationTagWithPlaceholder(tagname) {
   return React.createClass({
     render: function() {
       var props = _.clone(this.props);
@@ -87,11 +87,11 @@ export function makeSimpleTranslationTagWithPlaceholder(tagname) {
   });
 };
 
-export var input = makeSimpleTranslationTagWithPlaceholder('input');
-export var textarea = makeSimpleTranslationTagWithPlaceholder('textarea');
+var input = makeSimpleTranslationTagWithPlaceholder('input');
+var textarea = makeSimpleTranslationTagWithPlaceholder('textarea');
 
 //TODO support generic DOM elements in I18n tag
-export var I18n = React.createClass({
+var I18n = React.createClass({
   render: function() {
     return <span>{walkAndTranslate(this.props.children)}</span>
   }
@@ -100,7 +100,7 @@ export var I18n = React.createClass({
 
 var shimTags = ['label', 'span', 'p', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'button', 'li', 'option', 'div', 'b', 'i', 'strong', 'emphasis'];
 
-export var i18nDOM = _.reduce(_.map(shimTags, function(key) {
+var i18nDOM = _.reduce(_.map(shimTags, function(key) {
   return {key:key, tag:makeSimpleTranslationTag(key)}
 }), function(result, val) {
   result[val.key] = val.tag;
@@ -110,5 +110,3 @@ export var i18nDOM = _.reduce(_.map(shimTags, function(key) {
   input: input,
   textarea: textarea
 });
-
-export default = i18nDOM;

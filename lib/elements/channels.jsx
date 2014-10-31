@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var postal = require('postal');
 
-export var SubscriptionMixin = {
+var SubscriptionMixin = {
   /*
    * Tracks subscriptions and closes them on unmount
    */
@@ -43,7 +43,7 @@ export var SubscriptionMixin = {
 };
 
 
-export function ChannelStorage(channel, topic) {
+function ChannelStorage(channel, topic) {
   if (_.isString(channel)) {
     channel = postal.channel(channel);
   }
@@ -86,7 +86,7 @@ export function ChannelStorage(channel, topic) {
   });
 };
 
-export function ContextChannelStorage(channel, topic) {
+function ContextChannelStorage(channel, topic) {
   var self = this;
   ChannelStorage.bind(this)(channel, topic);
   this.contexts = {null: this.storage};

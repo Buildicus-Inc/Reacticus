@@ -12,7 +12,7 @@ var deepCloneComponent = require('./identities').deepCloneComponent;
  </reacticus.select>
 */
 
-export var Select = React.createClass({
+var Select = React.createClass({
   /* A specially styled select */
   propTypes: {
     value: React.PropTypes.node

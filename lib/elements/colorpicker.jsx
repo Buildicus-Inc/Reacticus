@@ -1,6 +1,6 @@
 var React = require('react');
 
-export var ColorPicker = React.createClass({
+var ColorPicker = React.createClass({
   propTypes: {
     value: React.PropTypes.string
   },

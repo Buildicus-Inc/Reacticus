@@ -1,6 +1,6 @@
 var React = require('react');
 
-export var Crop = React.createClass({
+var Crop = React.createClass({
 	getInitialState: function(){
 		return {image: this.props.image,scaled: false} || {}
 	},

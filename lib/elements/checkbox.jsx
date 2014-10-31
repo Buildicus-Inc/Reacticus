@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var React = require('react');
 
-export var CheckBox = React.createClass({
+var CheckBox = React.createClass({
   propTypes: {
     value: React.PropTypes.bool
   },

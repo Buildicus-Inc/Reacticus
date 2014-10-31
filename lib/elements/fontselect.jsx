@@ -4,7 +4,7 @@ var _ = require('lodash');
 var React = require('react');
 var Select = require('./select').Select
 
-export var FontSelect = React.createClass({
+var FontSelect = React.createClass({
   contextTypes: {
     site: React.PropTypes.object
   },

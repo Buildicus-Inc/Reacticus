@@ -12,7 +12,7 @@ var isComponent = identities.isComponent,
   </ListField>
 */
 
-export var DragBar = React.createClass({
+var DragBar = React.createClass({
   getInitialState: function() {
     return {
       hover: false
@@ -51,7 +51,7 @@ function findInput(struct, name) {
   }))
 }
 
-export var ListField = React.createClass({
+var ListField = React.createClass({
   getStateFromValue: function(value, prevValue) {
     var state = {
       value: value,

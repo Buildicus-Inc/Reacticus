@@ -3,7 +3,7 @@ var React = require('react');
 
 //value based helpers
 
-export function fillInState(state) {
+function fillInState(state) {
   //replaces undefined with empty string
   return _.transform(state, function(result, val, key) {
     if (val === undefined) val = "";
@@ -11,7 +11,7 @@ export function fillInState(state) {
   });
 };
 
-export function formUpdate(prop, val) {
+function formUpdate(prop, val) {
   var value = _.clone(this._pendingState ? this._pendingState.value : this.state.value);
 
   //sent dictionary of values
@@ -35,7 +35,7 @@ export function formUpdate(prop, val) {
   }
 };
 
-export var FormMixin = {
+var FormMixin = {
   propTypes: {
     value: React.PropTypes.object
   },

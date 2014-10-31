@@ -212,7 +212,7 @@ var icons = {
   treedeciduous: 'tree-deciduous'
 }
 
-export var IconSelect = React.createClass({
+var IconSelect = React.createClass({
   /* A specially styled select */
   propTypes: {
     value: React.PropTypes.node
