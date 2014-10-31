@@ -1,4 +1,4 @@
-var _ = require('lodash');
+import _ from 'lodash';
 var postal = require('postal');
 
 var SubscriptionMixin = {
