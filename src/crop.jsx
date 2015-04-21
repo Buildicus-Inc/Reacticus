@@ -1,6 +1,6 @@
-var React = require('react');
+import React from 'react';
 
-var Crop = React.createClass({
+export var Crop = React.createClass({
 	getInitialState: function(){
 		return {image: this.props.image,scaled: false} || {}
 	},
@@ -16,6 +16,7 @@ var Crop = React.createClass({
     console.log('new image selected to crop')
       var image = new Image()
       image.src = this.state.image;
+      image.crossOrigin = 'anonymous';
       var self = this
       image.onload = function(){
         var canvas = document.createElement('canvas');
@@ -43,7 +44,7 @@ var Crop = React.createClass({
 
         $(self.refs.crop.getDOMNode()).Jcrop({
           bgColor: 'none',
-          bgOpacity: .4,
+          bgOpacity: 0.4,
           aspectRatio: 1,
           setSelect: [0, 0, 100, 100],
           onSelect: self.cropSelectedArea,
@@ -57,6 +58,7 @@ var Crop = React.createClass({
     canvas.height = this.state.height
     var ctx = canvas.getContext('2d');
     var image = new Image();
+    image.crossOrigin = 'anonymous';
     image.src = this.state.scaled;
     var self = this;
     image.onload = function(){
@@ -87,8 +89,8 @@ var Crop = React.createClass({
     return new Blob(byteArrays, { type: contentType });
   },
   crop: function(){
-    var b64 = this.state.cropped
-    var b64 = b64.substring(b64.indexOf(',') + 1)
+    var b64 = this.state.cropped;
+    b64 = b64.substring(b64.indexOf(',') + 1);
     var blob = this.b64toBlob(b64,'image/png')
     this.props.onCrop({blob:blob, name: this.state.name})
     this.setState({scaled: false, image: false})
@@ -100,7 +102,7 @@ var Crop = React.createClass({
 	render: function(){
 		var image = null;
     if(this.state.scaled) image = <div>
-      <img ref="crop" width={this.state.width} height={this.state.height} src={this.state.scaled} />
+      <img ref="crop" crossOrigin="anonymous" width={this.state.width} height={this.state.height} src={this.state.scaled} />
       <button className="btn btn-success" onClick={this.crop}>Crop</button>
       <button className="btn btn-danger" onClick={this.closeCrop}>Close</button>
       </div>

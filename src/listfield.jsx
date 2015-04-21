@@ -1,9 +1,6 @@
-var _ = require('lodash');
-var React = require('react');
-var identities = require('./identities');
-var isComponent = identities.isComponent,
-  isInput = identities.isInput,
-  deepCloneComponent = identities.deepCloneComponent;
+import React from 'react';
+import _ from 'lodash';
+import {isComponent, isInput, deepCloneComponent} from './identities';
 
 /*
   <ListField onChange={this.receiveData} defaultValue={[{item: "foo"}]}>
@@ -12,7 +9,7 @@ var isComponent = identities.isComponent,
   </ListField>
 */
 
-var DragBar = React.createClass({
+export var DragBar = React.createClass({
   getInitialState: function() {
     return {
       hover: false
@@ -51,16 +48,18 @@ function findInput(struct, name) {
   }))
 }
 
-var ListField = React.createClass({
+export var ListField = React.createClass({
   getStateFromValue: function(value, prevValue) {
     var state = {
       value: value,
       count: _.size(value)+1,
     };
     if (prevValue) {
-      var toAdd = Math.max(state.count - _.size(this.state.identities), 0);
-      state.identities = this.state.identities;
-      state.identities.push.apply(state.identities, _.map(_.range(toAdd), _.uniqueId));
+      state.identities = this.state.identities.slice(0, state.count-1);
+      var toAdd = state.count - _.size(state.identities);
+      if (toAdd > 0) {
+        state.identities.push.apply(state.identities, _.map(_.range(toAdd), _.uniqueId));
+      }
     } else {
       state.identities = _.map(_.range(state.count), _.uniqueId)
     }
@@ -77,9 +76,13 @@ var ListField = React.createClass({
     if (!_.isUndefined(nextProps.value)) this.setState(this.getStateFromValue(nextProps.value, this.state.value));
   },
   componentWillUpdate: function(nextProps, nextState) {
-    if (nextProps.value !== undefined && nextProps.value != nextState.value) {
+    if (!_.isUndefined(nextProps.value) && nextProps.value != nextState.value) {
       nextState = _.extend(nextState, this.getStateFromValue(nextProps.value, nextState.value));
     }
+    if(nextState.value == null || nextState.value == undefined) {
+      nextState.value = []
+    }
+
   },
   addItem: function(event) {
     event.preventDefault()
@@ -162,7 +165,7 @@ var ListField = React.createClass({
         tgValue = this.props.value !== undefined ? 'value' : 'defaultValue';
 
     return _.map(this.state.identities, function(identity, index) {
-      var value = values[index];
+      var value = values ? values[index] : undefined;
       value = _.isUndefined(value) ? null : value;
 
       function updateProps(vd, props) {
@@ -217,8 +220,7 @@ var ListField = React.createClass({
     if (index === undefined) return;
 
     if (this.props.dataType == "array") {
-      //if (values[index] === undefined) values[index] = []
-      values[index] = value
+      values[index] = value || ''
     } else {
       if (!values[index]) values[index] = {}
       values[index][name] = value
@@ -242,7 +244,7 @@ var ListField = React.createClass({
     }
   },
 	render: function() {
-    return (<div key="listfield" className="reacticus-listfield">
+    return (<div key="listfield" className="reacticus-listfield" {...this.props}>
       {this.renderChildren()}
       <i key="add-item" className="listitem-add bif bif-plus" onClick={this.addItem}/>
       </div>);

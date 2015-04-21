@@ -1,18 +1,26 @@
-var _ = require('lodash');
-var postal = require('postal');
-var React = require('react');
-var SubscriptionMixin = require('./channels').SubscriptionMixin;
+import _ from 'lodash';
+import React from 'react';
+import Kefir from 'kefir';
+import {BinderMixin} from 'refluxxor';
 
-var ToggleMixin = {
+export var SectionToggleEvent = Kefir.emitter();
+//SectionToggleEvent.emit({section: foo, activeType: bar})
+
+export var ToggleMixin = {
   getInitialState: function() {
-    return {active: this.props.default || false}
+    return {active: this.props.default || this.props.active || false}
   },
   getComputedProps: function(moreProps) {
     return _.merge({"data-active": this.state.active ? 1 : 0}, this.props, moreProps)
+  },
+  componentWillReceiveProps: function(nextProps) {
+    if (nextProps.active !== undefined) {
+      this.setState({active: nextProps.active});
+    }
   }
 };
 
-var ToggleButton = React.createClass({
+export var ToggleButton = React.createClass({
   /* A button with a data-toggle that toggles from 1 to 0 everytime it is clicked */
   mixins: [ToggleMixin],
   onClick: function(event) {
@@ -26,9 +34,9 @@ var ToggleButton = React.createClass({
   }
 });
 
-var SectionToggleButton = React.createClass({
+export var SectionToggleButton = React.createClass({
   /* A button with a data-toggle that tied to props.section */
-  mixins: [ToggleMixin, SubscriptionMixin],
+  mixins: [ToggleMixin, BinderMixin],
   propTypes: {
     section: React.PropTypes.string.isRequired
   },
@@ -37,9 +45,8 @@ var SectionToggleButton = React.createClass({
     return {'id': _.uniqueId()}
   },
   componentWillMount: function() {
-    var self = this;
-    this.subscribe("reacticus.SectionToggleButton", this.props.section, function(data, envelope) {
-      self.setState({active: (data.activeType === self.props.id)})
+    this.bindTo(SectionToggleEvent.filter(x => x.section === this.props.sections), (data) => {
+      this.setState({active: (data.activeType === this.props.id)});
     });
   },
   onClick: function(event) {
@@ -47,10 +54,9 @@ var SectionToggleButton = React.createClass({
       event.preventDefault()
       return
     }
-    postal.publish({
-      channel: "reacticus.SectionToggleButton",
-      topic: this.props.section,
-      data: {activeType: this.props.id}
+    SectionToggleEvent.emit({
+      section: this.props.section,
+      activeType: this.props.id,
     });
     if (this.props.onClick) {
       return this.props.onClick(event)

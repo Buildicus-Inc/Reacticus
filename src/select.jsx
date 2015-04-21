@@ -1,9 +1,6 @@
-/** @jsx React.DOM */
-
-var _ = require('lodash');
-var React = require('react');
-var postal = require('postal');
-var deepCloneComponent = require('./identities').deepCloneComponent;
+import _ from 'lodash';
+import React from 'react';
+import {deepCloneComponent} from './identities';
 
 /*
  <reacticus.select defaultValue="foo" onChange={mycallback}>
@@ -12,7 +9,7 @@ var deepCloneComponent = require('./identities').deepCloneComponent;
  </reacticus.select>
 */
 
-var Select = React.createClass({
+export var Select = React.createClass({
   /* A specially styled select */
   propTypes: {
     value: React.PropTypes.node
@@ -72,16 +69,18 @@ var Select = React.createClass({
       this.setState({displayOptions: false})
     }
   },
+  getChildren: function() {
+    return _.filter(_.flatten(this.props.children), x => x && x.props);
+  },
   getSelected: function() {
     var currentValue = this.state.value;
-    return deepCloneComponent(_.find(_.flatten(this.props.children), function(child, index) {
-      if (!child) return
+    return deepCloneComponent(_.find(this.getChildren(), function(child, index) {
       var value = child.props.value,
           body = child.props.children;
-      if (!value && !currentValue) return true;
-      if (value === undefined) {
+      if (_.isUndefined(value)) {
         value = body
       }
+      if (!value && !currentValue) return true;
       return value === currentValue
     }));
   },
@@ -102,11 +101,10 @@ var Select = React.createClass({
   getOptions: function() {
     var currentValue = this.state.value,
         self = this;
-    return _.map(_.flatten(this.props.children), function(child, index) {
-      if (!child) return
+    return _.map(this.getChildren(), function(child, index) {
       var value = child.props.value,
           body = deepCloneComponent(child.props.children);
-      if (value === undefined) {
+      if (_.isUndefined(value)) {
         value = body
       }
       var props = _.extend({

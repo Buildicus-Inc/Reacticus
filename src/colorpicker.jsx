@@ -1,6 +1,6 @@
-var React = require('react');
+import React from 'react';
 
-var ColorPicker = React.createClass({
+export var ColorPicker = React.createClass({
   propTypes: {
     value: React.PropTypes.string
   },
@@ -11,42 +11,40 @@ var ColorPicker = React.createClass({
     return {
       showAlpha: false,
       showButtons: false,
-      preferredFormat: "hex"
+      preferredFormat: "hex",
+      allowEmpty: false
     }
   },
   componentWillReceiveProps: function(nextProps) {
     if (_.has(nextProps, 'value')) {
-      this.state.value = nextProps.value
-      $(this.getDOMNode()).spectrum("set", nextProps.value || "");
+      this.setState({value: nextProps.value || ""});
     }
   },
   shouldComponentUpdate: function(nextProps, nextState) {
-    if (nextProps.value !== undefined && nextProps.value != nextState.value) {
-       nextState.value = nextProps.value
-    }
-    if (this.state.value != nextState.value) {
+    if (this.state.value !== nextState.value) {
       $(this.getDOMNode()).spectrum("set", nextState.value);
     }
-    this.state = nextState;
-    this.props = nextProps;
     return false;
   },
   componentDidMount: function() {
     var self = this;
      $(this.getDOMNode()).spectrum({
       clickoutFiresChange: true,
-      preferredFormat: this.props.preferredFormat,
+      preferredFormat: this.props.showAlpha ? "rgb" : this.props.preferredFormat, //because of spectrum bug
       showButtons: this.props.showButtons,
+      allowEmpty: this.props.allowEmpty,
       showInput: true,
       showAlpha: this.props.showAlpha,
       change: function(color) {
-        var value;
-        if (self.props.showAlpha) {
-          value = color.toString()
-        } else {
-          value = color.toHexString();
+        var value = null;
+        if(color){
+          if (self.props.showAlpha) {
+            value = color.toString()
+          } else {
+            value = color.toHexString();
+          }
         }
-        if (value == self.state.value) return;
+        if (value === self.state.value) return;
         if (self.props.onChange) {
           var event = {
             type: 'input',
@@ -66,6 +64,6 @@ var ColorPicker = React.createClass({
     $(this.getDOMNode()).spectrum("destroy");
   },
   render: function() {
-    return <input {...this.props} type="color"/>;
+    return <input {...this.props} type="text"/>;
   }
 });

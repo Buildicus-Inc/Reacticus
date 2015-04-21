@@ -1,7 +1,7 @@
-var _ = require('lodash');
-var React = require('react');
+import React from 'react';
+import _ from 'lodash';
 
-var SlugInput = React.createClass({
+export var SlugInput = React.createClass({
   propTypes: {
     value: React.PropTypes.string
   },
@@ -39,7 +39,10 @@ var SlugInput = React.createClass({
       hasChanged: true
     })
     if (this.props.onChange) {
-      this.props.onChange(event)
+      this.props.onChange({
+        component: this,
+        value: this.slugify(event.target.value)
+      })
     } else {
       event.preventDefault()
     }

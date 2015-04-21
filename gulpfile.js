@@ -1,14 +1,16 @@
 var gulp = require('gulp');
-var react = require('gulp-react');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var traceur = require('gulp-traceur');
-gulp.task('default', function () {
-    return gulp.src('lib/**')
-    		.pipe(gulp.dest('dist/reacticus'))
-        .pipe(react())
-        .pipe(traceur())
-        .pipe(concat('reacticus.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist'));
+var to5 = require('gulp-babel');
+var mocha = require('gulp-mocha');
+
+gulp.task('build', function() {
+  gulp.src('src/**/*.{js,jsx}')
+    .pipe(to5())
+    .pipe(gulp.dest('dist'))
+});
+
+gulp.task('test', function() {
+  require("babel/register")();
+
+  gulp.src('tests/**/*test.js')
+    .pipe(mocha({reporter: 'nyan'}));
 });

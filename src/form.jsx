@@ -1,9 +1,9 @@
-var _ = require('lodash');
-var React = require('react');
+import _ from 'lodash';
+import React from 'react';
 
 //value based helpers
 
-function fillInState(state) {
+export function fillInState(state) {
   //replaces undefined with empty string
   return _.transform(state, function(result, val, key) {
     if (val === undefined) val = "";
@@ -11,7 +11,7 @@ function fillInState(state) {
   });
 };
 
-function formUpdate(prop, val) {
+export function formUpdate(prop, val) {
   var value = _.clone(this._pendingState ? this._pendingState.value : this.state.value);
 
   //sent dictionary of values
@@ -35,7 +35,7 @@ function formUpdate(prop, val) {
   }
 };
 
-var FormMixin = {
+export var FormMixin = {
   propTypes: {
     value: React.PropTypes.object
   },

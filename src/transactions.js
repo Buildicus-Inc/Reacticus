@@ -1,4 +1,4 @@
-var TransactionMixin = {
+export var TransactionMixin = {
   //CONSIDER: transact(promise) implies freezing the state updates and rolling back on promise failure
   blockRender: function(promise) {
     /* block the component from rendering updates until the promise is complete */

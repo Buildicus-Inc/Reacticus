@@ -1,8 +1,6 @@
-/** @jsx React.DOM */
+import _ from 'lodash';
+import React from 'react';
 
-var _ = require('lodash');
-var React = require('react');
-var postal = require('postal');
 /*
  <reacticus.select defaultValue="foo" onChange={mycallback}>
    <option value="">Select a Value</option>
@@ -212,7 +210,7 @@ var icons = {
   treedeciduous: 'tree-deciduous'
 }
 
-var IconSelect = React.createClass({
+export var IconSelect = React.createClass({
   /* A specially styled select */
   propTypes: {
     value: React.PropTypes.node
