@@ -20,7 +20,7 @@ var _TransactionMixin = require('./transactions');
 
 var _DOM$ImplementedDOM = require('./dom');
 
-var _I18n$gettext = require('./i18n');
+var _I18n$gettext$I18nReact = require('./i18n');
 
 var _Crop = require('./crop');
 
@@ -30,10 +30,11 @@ exports['default'] = {
   DOM: _DOM$ImplementedDOM.DOM,
   i18nDOM: _DOM$ImplementedDOM.DOM
 };
+exports.I18nReact = _I18n$gettext$I18nReact.I18nReact;
 exports.DOM = _DOM$ImplementedDOM.DOM;
-exports.I18n = _I18n$gettext.I18n;
+exports.I18n = _I18n$gettext$I18nReact.I18n;
 exports.FormMixin = _FormMixin.FormMixin;
-exports.gettext = _I18n$gettext.gettext;
+exports.gettext = _I18n$gettext$I18nReact.gettext;
 exports.TransactionMixin = _TransactionMixin.TransactionMixin;
 exports.Tabs = _Tabs.Tabs;
 exports.Crop = _Crop.Crop;

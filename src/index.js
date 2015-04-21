@@ -3,7 +3,7 @@ import React from 'react';
 import {FormMixin} from './form';
 import {TransactionMixin} from './transactions';
 import {DOM, ImplementedDOM} from './dom';
-import {I18n, gettext} from './i18n';
+import {I18n, gettext, I18nReact} from './i18n';
 import {Crop} from './crop';
 import {Tabs} from './tabs';
 
@@ -13,6 +13,7 @@ export default {
 };
 
 export {
+  I18nReact,
   DOM,
   I18n,
   FormMixin,

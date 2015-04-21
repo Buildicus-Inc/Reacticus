@@ -141,17 +141,6 @@ var textTags = ['label', 'span', 'p', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', '
 var inputTags = ['input', 'textarea'];
 
 //for drop in i18n, import this as React
-exports['default'] = {
-  createElement: createElement,
-  createClass: _React2['default'].createClass,
-  render: _React2['default'].render,
-  unmountComponentAtNode: _React2['default'].unmountComponentAtNode,
-  renderToString: _React2['default'].renderToString,
-  renderToStaticMarkup: _React2['default'].renderToStaticMarkup,
-  isValidElement: _React2['default'].isValidElement,
-  DOM: _React2['default'].DOM,
-  PropTypes: _React2['default'].PropTypes,
-  initializeTouchEvents: _React2['default'].initializeTouchEvents,
-  Children: _React2['default'].Children,
-  __spread: _React2['default'].__spread
-};
+var I18nReact = _import2['default'].merge({}, _React2['default'], {
+  createElement: createElement });
+exports.I18nReact = I18nReact;
